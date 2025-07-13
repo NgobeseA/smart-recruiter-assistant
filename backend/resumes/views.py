@@ -6,6 +6,8 @@ import pdfplumber
 
 from .models import Resume
 from .serializers import ResumeSerializer
+from jobs.models import JobPost
+from scoring.scoring_engine import semantic_score
 
 # Create your views here.
 class UploadResumeView(APIView):
@@ -29,5 +31,22 @@ class UploadResumeView(APIView):
             'details': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
-class ResumeListView(APIView):
-    pass
+class ResumeListWithScoreView(APIView):
+    def get(self, request, job_id):
+        try:
+            job = JobPost.objects.get(id=job_id)
+        except JobPost.DoesNotExist:
+            return Response({'error': 'Job not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        resumes = Resume.object.all()
+        resume_data = []
+
+        for resume in resumes:
+            score = semantic_score(resume.parsed_text, job.description)
+            print(f"score from {resume} resume: {score}")
+            serialized = ResumeSerializer(resume).data
+            print(f"serialized data: {serialized}")
+            serialized['score'] = score
+            resume_data.append(serialized)
+        
+        return Response(resume_data, status=status.HTTP_200_OK)
