@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Smart Recruitter Assistance | SRA{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+    <h2 class="text-center mb-4">Available Job Openings</h2>
+
+    {% for job in jobs %}
+        <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">
+            <a href="{% url 'job_detail' job.id %}" class="text-decoration-none text-primary">
+                {{ job.title }}
+            </a>
+            </h5>
+            <p class="card-text mb-0"><strong>{{ job.company }}</strong></p>
+            <p class="card-text text-muted">{{ job.location }}</p>
+        </div>
+        </div>
+    {% empty %}
+        <p>No job postings available at the moment.</p>
+    {% endfor %}
+{% endblock %}

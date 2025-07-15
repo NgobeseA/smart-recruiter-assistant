@@ -21,4 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/resumes/', include('resumes.urls')),
     # path('api/scoring/', include('scoring.urls')),
+    path('api/jobs/', include('jobs.urls')),
+    path('', include('jobs.urls')),
+
 ]
