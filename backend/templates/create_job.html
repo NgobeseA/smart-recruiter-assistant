@@ -21,6 +21,20 @@
         />
       </div>
       <div class="mb-3">
+        <label for="job_type" class="form-label">Job Type</label>
+        <select class="form-control" id="job_type" name="job_type" required>
+            <option value="">Select Job Type</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="industry" class="form-label">Industry</label>
+        <input type="text" class="form-control" id="industry" name="industry" placeholder="Industry">
+    </div>
+      <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea id="description" class="form-control" rows="4" placeholder="Description (one line at a time)"
         ></textarea>
@@ -35,6 +49,11 @@
       <div class="mb-3">
         <label for="qualifications" class="form-label">Qualifications</label>
         <textarea id="qualifications" class="form-control" rows="4" placeholder="Qualifications (one per line)"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="bonus" class="form-label">Bonus</label>
+        <textarea id="bonus" class="form-control" rows="4" placeholder="Bonus (one per line)"
         ></textarea>
       </div>
       

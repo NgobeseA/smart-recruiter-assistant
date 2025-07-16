@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{%block title%} {% if job %} {{job.title}} | SMR {% else %} No job found {% endif %}{% endblock%}
+{% block content %}
+<a href="">View applications</a>
+<div class="border p-3 rounded bg-light mb-3">
+    <h5>{{job.title}}</h5>
+    <p><strong>{{job.company}}</strong></p>
+    <p class="text-muted">{{job.location}}</p>
+    <p class="text-muted">{{job.job_type}}</p>
+    <p class="text-muted">{{job.industry}}</p>
+    <hr>
+    <h6>About the Job</h6>
+    <p class="mb-2">{{job.description}}</p>
+    <br />
+    <h6>Responsibilities</h6>
+    {% comment %} <ul>${responsibilities.map(r => `<li>${r}</li>`).join("")}</ul> {% endcomment %}
+    <p class="mb-2">{{job.responsibilities}}</p>
+    <br />
+    <h6>Qualifications</h6>
+    <p class="mb-2">{{job.qualifications}}</p>
+    
+    <button type="button" data-bs-toggle="modal" data-bs-target="#uploadCVModal" class="btn btn-primary">Apply Now</button>
+
+<!-- Vertically centered modal -->
+<div class="modal fade" id="uploadCVModal" tabindex="-1" aria-labelledby="uploadCVModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="uploadCVModalLabel">Application for {{ job.title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Please upload your cv to apply for this job</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="cvFile" class="form-label">Upload CV</label>
+                <input class="form-control" type="file" id="cvFile" name="cv">
+            </div>
+            <button type="submit" class="btn btn-success">Submit Application</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}

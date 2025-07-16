@@ -11,19 +11,22 @@ form.addEventListener("input", () => {
   const description = document.getElementById("description").value.split('\n').filter(Boolean);
   const responsibilities = document.getElementById("responsibilities").value.split('\n').filter(Boolean);
   const qualifications = document.getElementById("qualifications").value.split('\n').filter(Boolean);
-
-  console.log("Live preview updated", { title, company, location, description, responsibilities, qualifications });
+  const bonus = document.getElementById("bonus").value.split('\n').filter(Boolean);
 
   previewBox.innerHTML = `
     <h5>${title}</h5>
     <p><strong>${company}</strong></p>
     <p class="text-muted">${location}</p>
+    <p class="text-muted">${form.job_type.value}</p>
+    ${form.industry ? `<p class="text-muted">${form.industry.value}</p>` : ""}
+    <hr>
     <h6>About the Job</h6>
     ${description.map(line => `<p>${line}</p>`).join("")}
     <h6>Responsibilities</h6>
     <ul>${responsibilities.map(r => `<li>${r}</li>`).join("")}</ul>
     <h6>Qualifications</h6>
     <ul>${qualifications.map(q => `<li>${q}</li>`).join("")}</ul>
+    <ul>${bonus.map(b => `<li>${b}</li>`).join("")}</ul>
   `;
 });
 
@@ -33,7 +36,7 @@ saveBtn.addEventListener("click", async () => {
     title: form.title.value,
     company: form.company.value,
     location: form.location.value,
-    job_type: "Full Time",  // Or pull from select input
+    job_type: form.job_type.value,  // Or pull from select input
     industry: form.industry?.value || "Tech",  // Optional field
     description: document.getElementById("description").value,
     responsibilities: document.getElementById("responsibilities").value,
@@ -55,6 +58,8 @@ saveBtn.addEventListener("click", async () => {
       previewBox.innerHTML = "";
     } else {
       alert("Error publishing job.");
+      const errorData = await response.json();
+      console.error("Error details:", errorData);
     }
   } catch (err) {
     alert("Request failed.");
