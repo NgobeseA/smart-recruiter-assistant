@@ -21,3 +21,7 @@ def job_detail_view(request):
 
 def create_job_form_view(request):
     return render(request, 'create_job.html')
+
+def job_list_view(request):
+    jobs = JobPost.objects.all().order_by('-created_at')
+    return render(request, 'job_list.html', {'jobs': jobs})

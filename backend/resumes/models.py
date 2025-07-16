@@ -3,7 +3,7 @@ from jobs.models import JobPost
 
 # Create your models here.
 class Resume(models.Model):
-    job = models.ForeignKey(JobPost, on_delete=models.CASCADE)
+    job = models.ForeignKey(JobPost, on_delete=models.CASCADE, null=True)
     file = models.FileField(upload_to='media/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     parsed_text = models.TextField(blank=True)

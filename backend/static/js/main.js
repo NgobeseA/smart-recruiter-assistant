@@ -12,6 +12,8 @@ form.addEventListener("input", () => {
   const responsibilities = document.getElementById("responsibilities").value.split('\n').filter(Boolean);
   const qualifications = document.getElementById("qualifications").value.split('\n').filter(Boolean);
 
+  console.log("Live preview updated", { title, company, location, description, responsibilities, qualifications });
+
   previewBox.innerHTML = `
     <h5>${title}</h5>
     <p><strong>${company}</strong></p>

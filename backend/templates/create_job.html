@@ -1,26 +1,53 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Add a new Job | SRA {% endblock %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}Add a new Job | SRA
+{% endblock %} {% block content %}
 <div class="row">
-    <!-- Left Column: Job Form -->
-    <div class="col-md-6">
-      <h4>Create Job</h4>
-      <form id="jobForm">
-        <input name="title" class="form-control mb-2" placeholder="Job Title" required />
-        <input name="company" class="form-control mb-2" placeholder="Company" required />
-        <input name="location" class="form-control mb-2" placeholder="Location" required />
+  <!-- Left Column: Job Form -->
+  <div class="col-md-6">
+    <h4>Create Job</h4>
+    <form id="jobForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Job Title</label>
+        <input name="title" id="title" class="form-control" placeholder="Job Title" required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="company" class="form-label">Company</label>
+        <input name="company" id="company" class="form-control" placeholder="Company" required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input name="location" id="location" class="form-control" placeholder="Location" required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" rows="4" placeholder="Description (one line at a time)"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="responsibilities" class="form-label"
+          >Responsibilities</label
+        >
+        <textarea id="responsibilities" class="form-control" rows="4" placeholder="Responsibilities (one per line)"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="qualifications" class="form-label">Qualifications</label>
+        <textarea id="qualifications" class="form-control" rows="4" placeholder="Qualifications (one per line)"
+        ></textarea>
+      </div>
+      
+    </form>
+  </div>
 
-        <textarea id="description" class="form-control mb-2" rows="4" placeholder="Description (one line at a time)"></textarea>
-        <textarea id="responsibilities" class="form-control mb-2" rows="4" placeholder="Responsibilities (one per line)"></textarea>
-        <textarea id="qualifications" class="form-control mb-2" rows="4" placeholder="Qualifications (one per line)"></textarea>
-
-        <button type="submit" class="btn btn-primary">Create</button>
-      </form>
-    </div>
-
-    <!-- Right Column: Live Preview -->
-    <div class="col-md-6">
+  <!-- Right Column: Live Preview -->
+  <div class="col-md-6">
       <h4 class="text-success">Preview</h4>
-      <div id="jobPreview" class="border p-3 rounded bg-light"></div>
+      <div id="jobPreview" class="border p-3 rounded bg-light mb-3"></div>
+
+      <!-- Save & Publish button -->
+      <button id="saveBtn" class="btn btn-success">Save & Publish</button>
+    </div>
+</div>
 {% endblock %}
