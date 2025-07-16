@@ -2,7 +2,7 @@
 {% load static %}
 {%block title%} {% if job %} {{job.title}} | SMR {% else %} No job found {% endif %}{% endblock%}
 {% block content %}
-<a href="">View applications</a>
+<a href="" onClick="handleViewApplicants({{job.id}})" >View applications</a>
 <div class="border p-3 rounded bg-light mb-3">
     <h5>{{job.title}}</h5>
     <p><strong>{{job.company}}</strong></p>

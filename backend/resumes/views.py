@@ -38,7 +38,7 @@ class ResumeListWithScoreView(APIView):
         except JobPost.DoesNotExist:
             return Response({'error': 'Job not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        resumes = Resume.object.all()
+        resumes = Resume.object.filter(job)
         resume_data = []
 
         for resume in resumes:
